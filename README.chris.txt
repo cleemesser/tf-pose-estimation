@@ -1,7 +1,9 @@
-
+built tf_pose/pa_process/
+swig -python -c++ pafprocess.i && python3 setup.py build_ext --inplace
+---
 update: opencv 3.4 from the default channel did not work
 so set chanel_priority to flexible and then did
-conda install opencv -c conda-forge -> which lead to a big exchange
+conda install opencv -c conda-forge -> which lead to a big exchange and opencv 4.1.1 which worked
 
 Mostly successful try: tf14py37
 

@@ -156,5 +156,5 @@ dependencies:
     - tabulate==0.8.5
     - tensorpack==0.9.8
     - urllib3==1.25.6
-prefix: /usr/local/anaconda3/envs/tf14py37
+# prefix: /usr/local/anaconda3/envs/tf14py37
 
