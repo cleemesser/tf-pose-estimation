@@ -39,7 +39,7 @@ class Skeleton:
     def append(self, humans):  # this writes to disk instead of storing in memory
         """create json files to represent the poses for each frame on each line"""
         if not self.fp:
-            self.fp = open(self.file_name_json, "w+") # overwrites is that best???
+            self.fp = open(self.file_name_json, "w+")  # overwrites is that best???
         num_humans = len(humans)
         self.num_humans[self.frame_num] = num_humans
         #  consider skipping writing ifno about frames without any humans
@@ -61,24 +61,26 @@ class Skeleton:
         # these are the frame number numbers to act as keys to the dictionary we are going to make
         frame2poses = {}
         line_num = 0
-        print(f'about to open {json_file_name}')
+        print(f"about to open {json_file_name}")
         with open(json_file_name) as fp:
-            print('reading file')
-            while(True):
+            print("reading file")
+            while True:
                 line = fp.readline()
-                #print(line)
-                # speed up, if nh[line] == 0, then can skip or just = [] 
+                # print(line)
+                # speed up, if nh[line] == 0, then can skip or just = []
                 if line:
                     frame2poses[line_num] = json.loads(line)
                     line_num += 1
                 else:
-                    print('breaking')
+                    print("breaking")
                     break
         self.frame2poses = frame2poses
 
+
 def test_read():
     import cv2
-    video= '/home/cleemess/StanfordOpenPoseAnalysisVideo/myoclonic-atonic-vid02.mp4'
+
+    video = "/home/cleemess/StanfordOpenPoseAnalysisVideo/myoclonic-atonic-vid02.mp4"
     cap = cv2.VideoCapture(video)
     frame_rate = cap.get(cv2.CAP_PROP_FPS)
     # 29.97002997002997
@@ -87,10 +89,11 @@ def test_read():
     # In [15]: num_frames
     # Out[17]: 389
     sk = Skeleton(video, frame_rate, num_frames)
-    hfn ='/home/cleemess/StanfordOpenPoseAnalysisVideo/myoclonic-atonic-vid02num_humans.npy'
-    jfn = '/home/cleemess/StanfordOpenPoseAnalysisVideo/myoclonic-atonic-vid02.json'
+    hfn = "/home/cleemess/StanfordOpenPoseAnalysisVideo/myoclonic-atonic-vid02num_humans.npy"
+    jfn = "/home/cleemess/StanfordOpenPoseAnalysisVideo/myoclonic-atonic-vid02.json"
     sk.read(hfn, jfn)
     return sk
-                
-if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     sk = test_read()
