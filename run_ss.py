@@ -1,5 +1,7 @@
+# copied script from siddharth's repo, originally in home directory so paths need to be moved there
 import argparse
 import logging
+import json
 import sys
 import time
 
@@ -60,6 +62,35 @@ if __name__ == "__main__":
     humans = e.inference(
         image, resize_to_default=(w > 0 and h > 0), upsample_size=args.resize_out_ratio
     )
+
+    # code for getting coordinates in an image
+
+    centers = []
+    x = 0
+
+    for human in humans:
+        for i in range(17):
+            if i not in human.body_parts.keys():
+                continue  # when the i-th keypoint is not detected
+            body_part = human.body_parts[i]
+            center = (int(body_part.x * w + 0.5), int(body_part.y * h + 0.5))
+            centers.append(center)
+
+    # print actual coordinate for each joint
+    for human in humans:
+        x += 1
+        for i in range(17):
+            print("human " + str(x) + " joint number: ")
+            print(i)
+            print(centers[i])
+
+    # get json output
+
+    input = {"data": centers, "number of humans": x}
+
+    with open("./images/out.json", "w") as json_file:
+        json.dump(input, json_file)
+
     elapsed = time.time() - t
 
     logger.info("inference image: %s in %.4f seconds." % (args.image, elapsed))

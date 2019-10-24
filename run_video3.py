@@ -76,7 +76,7 @@ if __name__ == "__main__":
         # image_rgb = cv2.cvtColor(
         #    image_use, cv2.COLOR_BGR2RGB
         # )  # ret ndarray dtype=uinit8
-        if type(image)==np.ndarray:
+        if type(image) == np.ndarray:
             print(f"image.shape: {image.shape}")
             print(f"image_use.dtype: {image_use.dtype}, {image_use.shape}")
         # image.shape: (480, 582, 3)
@@ -95,20 +95,22 @@ if __name__ == "__main__":
                 resize_to_default=(w > 0 and h > 0),
                 upsample_size=args.resize_out_ratio,
             )
-            print(humans, w, h) # here is where we will output the pose information
+            print(humans, w, h)  # here is where we will output the pose information
             if args.show:
                 if not args.showBG:
                     image_use = np.zeros(image_use.shape)
-                image_use = TfPoseEstimator.draw_humans(image_use, humans, imgcopy=False)
+                image_use = TfPoseEstimator.draw_humans(
+                    image_use, humans, imgcopy=False
+                )
 
                 cv2.putText(
                     image_use,
-                "FPS: %f" % (1.0 / (time.time() - fps_time)),
-                (10, 10),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.5,
-                (0, 255, 0),
-                2,
+                    "FPS: %f" % (1.0 / (time.time() - fps_time)),
+                    (10, 10),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.5,
+                    (0, 255, 0),
+                    2,
                 )
                 cv2.imshow("tf-pose-estimation result", image_use)
                 fps_time = time.time()

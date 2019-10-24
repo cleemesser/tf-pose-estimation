@@ -52,19 +52,20 @@ class Skeleton:
         self.num_humans = np.zeros(num_frames, dtype=np.uint32)
         self.body_parts = []  # 0-15
         self.file_name_base = str(file_path.parent / file_path.stem)
-        self.file_name_json = self.file_name_base  + ".json" 
+        self.file_name_json = self.file_name_base + ".json"
         self.fp = open(self.file_name_json, "w+")
 
     def append(self, humans):
         num_humans = len(humans)
         self.num_humans[self.frame_num] = num_humans
         self.fp.write(json.dumps(humans, cls=customEncoder))
-        self.fp.write('\n')
+        self.fp.write("\n")
         self.frame_num += 1
 
     def cleanup(self):
         self.fp.close()
-        np.save(self.file_name_base+'num_humans.npy', self.num_humans)
+        np.save(self.file_name_base + "num_humans.npy", self.num_humans)
+
 
 if __name__ == "__main__":
 
@@ -124,7 +125,7 @@ if __name__ == "__main__":
                 resize_to_default=(w > 0 and h > 0),
                 upsample_size=args.resize_out_ratio,
             )
-            #print(humans, w, h)  # here is where we will output the pose information
+            # print(humans, w, h)  # here is where we will output the pose information
             skeletons.append(humans)
             if args.show:
                 if not args.showBG:

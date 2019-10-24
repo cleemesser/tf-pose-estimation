@@ -74,7 +74,7 @@ if __name__ == "__main__":
         # image_rgb = cv2.cvtColor(
         #    image_use, cv2.COLOR_BGR2RGB
         # )  # ret ndarray dtype=uinit8
-        if type(image)==np.ndarray:
+        if type(image) == np.ndarray:
             print(f"image.shape: {image.shape}")
             print(f"image_use.dtype: {image_use.dtype}, {image_use.shape}")
         # image.shape: (480, 582, 3)
