@@ -1,0 +1,10 @@
+#!/bin/bash
+# good for testing
+# echo ffmpeg -loglevel error  -i $1 -c:v libx264 -crf 23 -c:a aac -q:a 100  $2
+
+# this works sometimes but sometimes it does not set the fps correctly
+#ffmpeg -loglevel error  -i $1 -c:v libx264 -crf 23 -c:a aac -q:a 100  $2
+
+# this verion uses assuems everything makes sense to use the standard ~29.97 30000/1001 fps
+
+ffmpeg -loglevel error  -r 30000/1001 -i $1 -c:v libx264 -crf 23 -c:a aac -q:a 100 -r 30000/1001 $2 
