@@ -84,6 +84,13 @@ def test_read():
     cap = cv2.VideoCapture(video)
     frame_rate = cap.get(cv2.CAP_PROP_FPS)
     # 29.97002997002997
+    # probably want that to be the fallback
+    # also can I add that to ones that are miss labeled? with the "-r 29.97002997002997" argument to ffmpeg
+    # note need to specify the input rate as well here is an example from superuser.com:
+    # ~/ffmpeg/ffmpeg/ffmpeg -loop_input \
+    # -t 105 -r 30000/1001 -i v%4d.tga -i final.ac3 \
+    # -vcodec mpeg2video -qscale 1 -s 400x400 -r 30000/1001 \
+    # -acodec copy -y out.mpeg 2> out.txt
     num_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
     # In [15]: num_frames
